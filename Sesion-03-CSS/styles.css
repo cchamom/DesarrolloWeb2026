@@ -18,3 +18,33 @@
 /* TODO: Diseño responsivo */
 /* - Usar @media queries para cambiar entre mobile y desktop */
 /* - La galería debe ser responsiva usando Grid + media queries */
+
+.galeria {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.producto {
+    background: rgb(206, 194, 194);
+    border: 3px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.producto:hovver {
+    background: gray;
+    transform: translateY(-5px);
+}
+
+.producto-info {
+    text-align: center;
+    padding: 10px;
+}
+
+.producto-info h2 {
+    font-size: 1.2rem;
+    color: black;
+    margin-bottom: 10px;
+}
