@@ -48,3 +48,27 @@
     color: black;
     margin-bottom: 10px;
 }
+
+.producto-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.producto img {
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
+.btn-comprar {
+    color: white;
+    border: none;
+    background: #130dca;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-comprar:hover {
+     background: #07d3e1;
+}
