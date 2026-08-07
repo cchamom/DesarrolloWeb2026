@@ -18,6 +18,10 @@
 /* TODO: Diseño responsivo */
 /* - Usar @media queries para cambiar entre mobile y desktop */
 /* - La galería debe ser responsiva usando Grid + media queries */
+h1,h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
 .galeria {
     display: grid;
@@ -54,6 +58,12 @@
     text-align: center;
 }
 
+.precio {
+    color: black;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
 .producto img {
     display: block;
     height: auto;
@@ -71,4 +81,44 @@
 
 .btn-comprar:hover {
      background: #07d3e1;
+}
+
+@media (max-width: 768px) {
+  .galeria {
+    grid-template-columns: 1fr; 
+  }
+}
+
+.todo-list {
+    background: #0718d0;
+    padding: 20px;
+    max-width: 300px;
+    margin: 30px auto;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.todo-list h2 {
+    text-align:  center;
+    margin-bottom: 12px;
+    color: white;
+    font-size: 2rem;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #b4e906;
+}
+
+.todo-item label {
+    flex: 2;
+    cursor: pointer;
+    color: white;
+    font-size: 1rem;
+}
+
+.todo-item:hover {
+    background: #03d1f6;
 }
