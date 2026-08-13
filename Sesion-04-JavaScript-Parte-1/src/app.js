@@ -34,9 +34,17 @@ export function generarId() {
  *   La tarea creada, o null si el texto es vacío.
  */
 export function agregarTarea(texto) {
-    // TODO: validar que `texto` no esté vacío (trim), crear el objeto
-    // { id, texto, completada: false }, hacer push al array `tareas`
-    // y devolverlo. Si el texto es vacío, devolver null.
+   const limpiar = texto.trim()
+   if(!limpiar) return null
+
+   const nuevaTarea = {
+    id: generarId(),
+    texto: limpiar,
+    completada: false
+   }
+
+   tareas.push(nuevaTarea)
+   return nuevaTarea
 }
 
 /**
@@ -65,24 +73,34 @@ export function toggleTarea(id) {
  * @returns {Array}
  */
 export function filtrarTareas(filtro) {
-    // TODO: implementar la lógica de filtrado.
+    switch(filtro) {
+        case "pendientes":
+        return tareas.filter((t) => !t.completada)
+        case "completadas":
+            return tareas.filter((t) => !t.completada)
+        case "todas":
+        default: 
+        return tareas
+    }
 }
 
 /**
  * Persiste el array `tareas` en localStorage como JSON.
  */
 export function guardar() {
-    // TODO: usar localStorage.setItem con la clave STORAGE_KEY.
-    // El valor debe ser JSON.stringify(tareas).
+   localStorage.setItem(STORAGE_KEY, JSON.stringify(tareas))
 }
 
 /**
  * Carga las tareas desde localStorage. Si no hay nada, deja el array vacío.
  */
 export function cargar() {
-    // TODO: leer localStorage con STORAGE_KEY.
-    // Si existe, hacer JSON.parse y asignarlo a `tareas`.
-    // Si no existe o falla, `tareas` se queda como [].
+   try {
+    const data = localStorage.getItem(STORAGE_KEY)
+    tareas = data ? JSON.parse(data) : []
+   } catch {
+    tareas = []
+   }
 }
 
 // =====================================================
