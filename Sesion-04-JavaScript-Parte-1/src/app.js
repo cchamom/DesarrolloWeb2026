@@ -53,8 +53,9 @@ export function agregarTarea(texto) {
  * @returns {boolean}
  */
 export function eliminarTarea(id) {
-    // TODO: filtrar `tareas` para quitar la que tenga ese id.
-    // Devuelve true si eliminó al menos una, false si no.
+    const tareaLenght = tareas.length
+    tareas = tareas.filter((t) => t.id !== id)
+    return tareas.length < tareaLenght
 }
 
 /**
