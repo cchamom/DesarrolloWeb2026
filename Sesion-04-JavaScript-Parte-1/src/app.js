@@ -34,6 +34,11 @@ export function generarId() {
  *   La tarea creada, o null si el texto es vacío.
  */
 export function agregarTarea(texto) {
+
+    if(typeof texto !== "string" || !texto.trim()) {
+        return null
+    }
+
    const limpiar = texto.trim()
    if(!limpiar) return null
 
