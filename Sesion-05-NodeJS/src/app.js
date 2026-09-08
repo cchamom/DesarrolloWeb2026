@@ -59,7 +59,20 @@ function leerBody(req) {
  * @returns {{ nombre: string, puerto: number }}
  */
 export function parsearArgumentos(argv) {
-    throw new Error('Not implemented: parsearArgumentos');
+   let nombre = 'invitado'
+   let puerto = 30000
+   for(let i = 2; i <argv.length; i++) {
+    if(argv[i] === '--nombre' && argv[i+1]) {
+        nombre = argv[i+1]
+        i++
+    } else if (argv[i] === '--puerto' && argv[i+1]) {
+        const parsePuerto = Number(argv[i+1])
+        puerto = parsePuerto
+    }
+    i++
+   }
+
+   return {nombre, puerto}
 }
 
 /**
@@ -72,7 +85,15 @@ export function parsearArgumentos(argv) {
  * @returns {{ puerto: number, nombreApp: string, archivoDatos: string }}
  */
 export function obtenerConfig(env) {
-    throw new Error('Not implemented: obtenerConfig');
+    const puerto = env.PORT ? Number(env.POST) : 3000
+    const app_Nombre = env.NOMBRE_APP || 'mensaje-api'
+    const datos_archivo = env.ARCHIVO_DATOS || 'data/mensajes.json'
+
+    return {
+        puerto: isNaN(puerto) ? 3000:puerto,
+        app_Nombre,
+        datos_archivo
+    }
 }
 
 /**
@@ -80,7 +101,12 @@ export function obtenerConfig(env) {
  * @returns {{ plataforma: string, nucleos: number, memoriaLibreMB: number, hostname: string }}
  */
 export function infoSistema() {
-    throw new Error('Not implemented: infoSistema');
+    return {
+        plataforma: os.platform(),
+        nucleos: os.cpus().length,
+        memoriaLibreMB: Math.round(os.freemem()/(1024*1024)),
+        hostname: os.hostname()
+    }
 }
 
 /**
