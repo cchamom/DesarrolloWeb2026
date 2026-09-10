@@ -119,7 +119,17 @@ export function infoSistema() {
  * @returns {{ registrar: (mensaje: string) => void, onRegistro: (fn: (linea: string) => void) => void }}
  */
 export function crearLogger() {
-    throw new Error('Not implemented: crearLogger');
+    const emisor = new EventEmitter()
+    return {
+        registrar(mensaje) {
+            const fecchaIso = new Date().toISOString()
+            const linea = `[${fechaIso}] ${mensaje}`
+            emisor.emit('registro', linea)
+        },
+        onRegistro(fn) {
+            emisor.on('registro', fn)
+        }
+    }
 }
 
 /**
@@ -130,7 +140,13 @@ export function crearLogger() {
  * @returns {Promise<Array<{id: string, texto: string, fecha: string}>>}
  */
 export async function leerMensajes(archivoDatos) {
-    throw new Error('Not implemented: leerMensajes');
+    try {
+        const contenido = await fs.readFile(archivoDatos, 'utf-8')
+        const datos = JSON.parse(contenido)
+        return Array.isArray(datos) ? datos:[]
+    } catch(error) {
+        return[]
+    }
 }
 
 /**
