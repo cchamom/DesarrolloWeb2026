@@ -18,6 +18,8 @@ import { pipeline } from 'node:stream/promises';
 import { Readable } from 'node:stream';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { resolve } from 'node:dns';
+import { rejects } from 'node:assert';
 
 // __dirname y __filename reproducidos con import.meta.url (ES Modules)
 export const __filename = fileURLToPath(import.meta.url);
@@ -85,7 +87,25 @@ export async function filtrarLogs(origen, destino, texto) {
  * @returns {Promise<string[]>}
  */
 export async function leerLineas(ruta) {
-    throw new Error('Not implemented: leerLineas');
+    return new Promise((resolve, reject) => {
+        const stream = createReadStream(ruta, {encoding: 'utf-8'})
+        let contenido = ''
+
+        stream.on('data', (chunk) => {
+            contenido += chunk
+        })
+
+        stream.on('end', () => {
+            const lineas = contenido
+            .split(/\r?\n/)
+            .map((linea) => linea.length > 0)
+            resolve(lineas)
+        })
+
+        stream.on('error',(err) => {
+            reject(err)
+        })
+    })
 }
 
 /**
