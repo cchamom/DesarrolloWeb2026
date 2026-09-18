@@ -35,6 +35,7 @@ export class RepositorioAlumnos {
      */
     listar() {
         throw new Error('TODO: implementar RepositorioAlumnos.listar()');
+        return [...this.alaumnos]
     }
 
     /**
@@ -44,6 +45,7 @@ export class RepositorioAlumnos {
      */
     obtener(id) {
         throw new Error('TODO: implementar RepositorioAlumnos.obtener()');
+        return this.alumnos.find(a => a.id == id) || null
     }
 
     /**
@@ -53,6 +55,9 @@ export class RepositorioAlumnos {
      */
     crear(datos) {
         throw new Error('TODO: implementar RepositorioAlumnos.crear()');
+        const nuevo = {id: `a-${this.siguienteId++}`, ...datos}
+        this.alumnos.push(nuevo)
+        return nuevo
     }
 
     /**
@@ -63,6 +68,8 @@ export class RepositorioAlumnos {
      */
     actualizar(id, datos) {
         throw new Error('TODO: implementar RepositorioAlumnos.actualizar()');
+        const index = this.alumnos.findIndex(a => a.id == id)
+        if(index == -1) return nullthis.alumnos[index] = {...this.alumnos,id}
     }
 
     /**
@@ -72,5 +79,11 @@ export class RepositorioAlumnos {
      */
     eliminar(id) {
         throw new Error('TODO: implementar RepositorioAlumnos.eliminar()');
+        const index = this.alumnos.findIndex(a => a.id == id)
+        if(index === -1) return false
+        this.alumnos.splice(index, 1)
+        return true
     }
 }
+
+export default new AlumnoRepositorio()
